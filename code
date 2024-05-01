@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Code_for_1kCharac_Generator
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // I've used Random rnd to generate the ASCII table and the char data type with an array index of 1000
+            // to provide the collection with the exact amount of 1000 which is divisble by a hundred.
+            // The first process asks for the user's input through a single character then proceeds to the for loop
+            // to iterate via the chars array (1000) that starts from ASCII 32 as "rnd.Next(32, 127)" where 32
+            // is the minimum for the ASCII table and 127 as the maximum length without the extended ASCII.
+            // Next is the foreach for iterating through the chars/ASCII in the array, and as for the "present++"
+            // keeps in count of the how many indexes that are currently inside from whatever the user's input that
+            // is based on the ASCII table. The "holders.Add(present)" section holds the
+            // total appearances of the user's input in the index. And the rest prints the overall results from the user's input.
+
+
+            Random rnd = new Random();
+            char[] chars = new char[1000];
+            List<int> holders = new List<int>();
+            char loob = ' ';
+            char uInput = ' ';
+            int counter = 0;
+            int present = 0;
+
+            Console.WriteLine("Please input a single character: ");
+            uInput = char.Parse(Console.ReadLine());
+
+            for (int x = 0; x < chars.Length; x++)
+            {
+                loob = (char)rnd.Next(32, 127);
+                chars[x] = loob;
+            }
+
+            foreach (char c in chars)
+            {
+                present++;
+                if (uInput == c)
+                {
+                    holders.Add(present);
+                    counter++;
+                }
+            }
+
+            Console.WriteLine("Your input was found: " + counter + " times.");
+            Console.WriteLine("These are the indexes it was present in: ");
+
+            foreach (int h in holders)
+            {
+                Console.WriteLine(h);
+            }
+            Console.ReadKey();
+        }
+    }
+}
+
